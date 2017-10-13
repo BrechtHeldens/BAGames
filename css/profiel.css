@@ -1,0 +1,38 @@
+.header{
+  background-color: #333333;
+  margin-bottom: 3em;
+}
+
+#eersteNavigatie{
+  margin-left: 1em;
+}
+
+#wit{
+  color: white;
+}
+
+#wit:hover{
+  background-color: #2d2d2d;
+}
+
+table{
+  padding: 0;
+  margin-left: 2em;
+  margin-top: 1em;
+}
+
+th{
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+
+td{
+
+  padding-left: 2em;
+  padding-right: 1em;
+}
+
+
+#header:hover{
+  background-color: white;
+}
