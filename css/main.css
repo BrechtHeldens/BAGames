@@ -5,6 +5,7 @@
 	width: 100%;
 	height: 100%;
 	position: absolute;
+	color: #000000;
 }
 
 /* -- Navbar --*/
@@ -81,6 +82,19 @@
 	}
 
 /* -- Content -- */
+	/* -- Algemeen --*/
+	textarea{
+		min-width: 290px;
+		width: 25vw;
+		max-width: 25vw;
+		min-height: 5vh;
+		height: 10vh;
+		overflow: auto;
+	}
+	hr{
+		width: 11vw;
+	}
+
 	/* -- Classes -- */
 	.full-image{
 		width: 100%;
@@ -91,7 +105,7 @@
 		position: relative;
 		background-color: black;
 		opacity: 0.9;
-		margin: 9% auto;
+		margin: 16vh auto;
 		margin-bottom: 5px;
 		width: 30%;
 		padding-bottom: 6vw;
@@ -128,16 +142,25 @@
 	/* -- Id's -- */
 	#gametitel{
   	font-size: 2em;
+		background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
+		padding: 0;
+	}
+	#gametitel a, #gametitel a:hover{
+		color: #5491af;
+		text-decoration: none;
 	}
 	#gameframe{
-  	border-style: solid;
-  	border-width: 1px;
-  	border-color: black;
   	height: auto;
-  	width: 32%;
+  	width: 31.5%;
   	position: relative;
-  	margin-left: 10px;
-  	margin-top: 10px;
+		margin-left: 1.4vw;
+  	margin-top: 1.4vw;
+		margin-bottom: 1.4vw;
+		padding: 0;
+		background-color: rgba(0,0,0,0.8);
+		border-style: outset;
+		border-width: 5px 5px 5px 5px;
+		border-color: #9BD4DB;
 	}
 	#inlog{
 		background-image:url('../images/Arcade_Background.png');
@@ -149,6 +172,23 @@
 	  width: 80%;
 	  height: 50%;
 	  margin-bottom: 15px;
+	}
+	#uitleg{
+		border-style:ridge;
+		border-width: 5px 0 5px 0;
+		border-color: #9BD4DB;
+  	width: 30%;
+  	margin-top: 1.5em;
+  	margin-left: 15vw;
+  	margin-right: 15vw;
+  	background-color: black;
+  	padding: 3em;
+	}
+	#uitleg p{
+		text-align: left;
+		color: white;
+		text-indent: 50px;
+		text-shadow: 0px 0px 4px #3bc9ed;
 	}
 
 	/* -- Knop -- */
@@ -164,8 +204,18 @@
 		font-weight: bold;
 	  text-transform: uppercase;
 	}
-	hr{
-		width: 11vw;
+	button{
+		margin-top: 1em;
+		border: none;
+		color: #ffffff;
+		width: auto;
+		padding: 1em 1.6em;
+		height: 50px;
+		background-color: #25354f;
+		font-size: .9em;
+		font-weight: bold;
+	  text-transform: uppercase;
+		margin-bottom: 1em;
 	}
 
 	#eersteNavigatie{
@@ -203,4 +253,26 @@
 
 	.fb-login-button{
 		width: 20%;
+	}
+
+	/* -- Feedback --*/
+	/*-- Classes --*/
+	.feedback{
+			margin: 5% auto;
+			width: 40%;
+			min-width: 300px;
+
+	}
+
+	.feedback table{
+		margin:0;
+	}
+
+	.feedback input[type="text"]{
+		width: 25vw;
+		min-width: 290px;
+	}
+
+	.feedback td{
+		padding: 5px;
 	}
