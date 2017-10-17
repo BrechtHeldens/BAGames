@@ -77,7 +77,7 @@ if (!isset($_SESSION["gebruikersid"])) {
           <br>
           <div class="col-xs-12">
             <center>
-              <a href="offline.php">Offline halen</a>
+              <a href="offline.php"><button>Offline halen</button></a>
             </center>
           </div>';
 
@@ -87,7 +87,7 @@ if (!isset($_SESSION["gebruikersid"])) {
       print "<center><a href='feedback.php'><button>Klik hier om feedback in te dienen</button></a></center>";
 
       echo '</div>';
-      
+
       ?>
 
   </body>
