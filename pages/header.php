@@ -19,7 +19,7 @@ include '../handelingen/connect.php';
 
   </head>
 
-  <body style="background-color: #537399;">
+  <body style="background: linear-gradient(to right, #43658e, #6e8ec1, #6e8ec1, #43658e);">
 
     <!--Header-->
     <div id="headerback">
@@ -41,9 +41,9 @@ include '../handelingen/connect.php';
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">	<!--Responsive als navbar te breed is-->
             <ul class= "nav navbar-nav"  id="myNavbar">
 
-              <li ><a href="../index.php" id="headerHover">⌂</a></li>
+              <li><a href="../index.php" id="headerHover">⌂</a></li>
 
-              <li ><a href="../pages/games.php" id="headerHover">GAMES</a></li>
+              <li><a href="../pages/games.php" id="headerHover">GAMES</a></li>
 
               <?php
               if ($_SESSION['gebruikersid'] != 0) {
@@ -72,11 +72,11 @@ include '../handelingen/connect.php';
 
               if ($_SESSION['gebruikersid'] == 0) {
 
-              echo '<li ><a href="../pages/inloggen.php" id="headerHover">LOG IN</a></li>';
+              echo '<li><a href="../pages/inloggen.php" id="headerHover">LOG IN</a></li>';
 
             } else {
 
-              echo '<li ><a href="../pages/uitloggen.php" id="headerHover">LOG UIT</a></li>';
+              echo '<li><a href="../pages/uitloggen.php" id="headerHover">LOG UIT</a></li>';
 
             }
 
