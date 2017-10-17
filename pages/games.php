@@ -70,7 +70,7 @@ if (!isset($_SESSION["gebruikersid"])) {
     }
 
     if (isset($_SESSION['gebruikerstype'])) {
-      
+
       if ($_SESSION['gebruikerstype'] == 1) {
         echo '
         <div class="row">
@@ -84,7 +84,10 @@ if (!isset($_SESSION["gebruikersid"])) {
         }
       }
 
-      print "<a href='feedback.php'>Klik hier om feedback in te dienen</a>";
+      print "<center><a href='feedback.php'><button>Klik hier om feedback in te dienen</button></a></center>";
+
+      echo '</div>';
+      
       ?>
 
   </body>
