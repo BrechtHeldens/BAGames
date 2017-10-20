@@ -29,7 +29,7 @@ if (!isset($_SESSION["gebruikersid"])) {
 
 </head>
 
-  <body style="background-color: #537399;">
+  <body style="background: linear-gradient(to right,#43658e, #6e8ec1, #6e8ec1,#43658e);">
 
     <!--Header-->
     <div id="headerback">
@@ -51,15 +51,15 @@ if (!isset($_SESSION["gebruikersid"])) {
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">	<!--Resposive als navbar te breed is-->
             <ul class= "nav navbar-nav"  id="myNavbar">
 
-              <li ><a href="index.html" id="headerHover">⌂</a></li>
+              <li><a href="index.html" id="headerHover">⌂</a></li>
 
-              <li ><a href="pages/games.php" id="headerHover">GAMES</a></li>
+              <li><a href="pages/games.php" id="headerHover">GAMES</a></li>
 
               <?php
               if ($_SESSION['gebruikersid'] != 0) {
               ?>
 
-              <li ><a href="pages/winkelmenu.php" id="headerHover">SHOP</a></li>
+              <li><a href="pages/winkelmenu.php" id="headerHover">SHOP</a></li>
 
               <?php
               }
@@ -70,9 +70,9 @@ if (!isset($_SESSION["gebruikersid"])) {
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="headerHover">PROFILE <span class="caret"></span></a>	<!--Pijltje omlaag-->
                 <ul class="navbar-inverse dropdown-menu">
 
-                  <li ><a href="pages/profiel.php" id="headerHover">My profile</a></li>
+                  <li><a href="pages/profiel.php" id="headerHover">My profile</a></li>
 
-                  <li ><a href="pages/friends.php" id="headerHover">Friends</a></li>
+                  <li><a href="pages/friends.php" id="headerHover">Friends</a></li>
 
                 </ul>
               </li>
@@ -82,11 +82,11 @@ if (!isset($_SESSION["gebruikersid"])) {
 
               if ($_SESSION['gebruikersid'] == 0) {
 
-              echo '<li ><a href="pages/inloggen.php" id="headerHover">LOG IN</a></li>';
+              echo '<li><a href="pages/inloggen.php" id="headerHover">LOG IN</a></li>';
 
             } else {
 
-              echo '<li ><a href="pages/uitloggen.php" id="headerHover">LOG UIT</a></li>';
+              echo '<li><a href="pages/uitloggen.php" id="headerHover">LOG UIT</a></li>';
 
             }
 
