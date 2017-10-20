@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blackjack</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Fonts -->
+  </head>
+
+  <body>
+
+    <!-- Kaarten van dealer -->
+    <div class="main">
+      <div class="container-fluid">
+        <center><div id="kaart">
+          <div id="dealerkaarten" class="row">
+            <div class="col-xs-6">
+              <img id="kaart1" src="../kaartendek/kaartbg.png"/>
+            </div>
+            <div class="col-xs-6">
+              <img id="kaart2" src="../kaartendek/kaartbg.png"/>
+            </div>
+          </div>
+
+          <div id="spelerskaarten" class="row">
+            <div class="col-xs-6">
+              <img id="eigenkaart1" src="../kaartendek/kaartbg.png"/>
+            </div>
+            <div class="col-xs-6">
+              <img id="eigenkaart2" src="../kaartendek/kaartbg.png"/>
+            </div>
+          </div>
+        </div></center>
+      </div>
+    </div>
+
+    <!-- Kaarten van speler -->
+    <div class="main">
+      <div class="container-fluid">
+        <center><div id="kaart">
+          <img src="../kaartendek/48.png"/>
+        </div></center>
+      </div>
+    </div>
+
+
+    <center><div class="footer">
+      <center><div class="container">
+
+        <div class="row">
+          <div class="col-xs-4"><button class="btn">Deal</button></div>
+          <div class="col-xs-4"><button class="btn">Hit</button></div>
+          <div class="col-xs-4"><button class="btn">Stand</button></div>
+        </div>
+
+      </div></center>
+    </div></center>
+
+    <script>
+
+    var aantalWins = 0;
+    var kaartendek = [];
+    var getrokkenKaarten = [];
+    var kaartenSpeler = [];
+    var kaartenBank = [];
+    start();
+
+    function start(){
+
+
+      initialiseerKaarten();
+
+      kaartenSpeler.push(neemKaart());
+      kaartenSpeler.push(neemKaart());
+      kaartenBank.push(neemKaart());
+      kaartenBank.push(neemKaart());
+
+    }
+
+    //KAARTEN INITIALISEREN
+    function initialiseerKaarten(){
+
+      for (var x = 1; x <= 4; x++) {
+        for (var y = 1; y <= 13; y++) {
+          var kaartnummer;
+          kaartnummer = ((x - 1) * 13) + y;
+          kaartendek.push(kaartnummer);
+        }
+      }
+
+    }
+
+    //NIEUWE KAART SELECTEREN
+    function neemKaart(){
+      do{
+        var kaart = Math.floor((Math.random() * kaartendek.length) + 1);
+        var newKaart;
+
+        for (var i = 0; i < getrokkenKaarten.length; i++) {
+          if (kaart === getrokkenKaarten[i]) {
+            newKaart = false;
+            i = getrokkenKaarten.length;
+          } else {
+            newKaart = true;
+          }
+        }
+
+      } while (newKaart == false);
+
+      getrokkenKaarten.push(kaart);
+      return kaart;
+    }
+
+      //Animation hier
+
+    </script>
+  </body>
+</html>

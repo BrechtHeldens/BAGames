@@ -1,0 +1,41 @@
+body{
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/bg.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(220, 222, 226, 0.6);
+  width: 100vw;
+  height: 7.5vh;
+}
+
+.btn{
+  margin-top: 2vh;
+  width: 80%;
+  background-color: #2b6dd8;
+  color: white;
+  font-weight: 700;
+  transition-duration: 0.3s;
+}
+
+.btn:hover{
+  color: white;
+  transform: scale(1.18);
+  box-shadow: 1px 1px #444444;
+}
+
+.main{
+  padding-top: 10em;
+}
+
+img{
+  height: 10%;
+  width: 10%;
+  background-color: rgba(0,0,0,0);
+}
