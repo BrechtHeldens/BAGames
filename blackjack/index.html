@@ -155,6 +155,15 @@
       if(eigenkaart2%13 === 11 || eigenkaart2%13 === 12 || eigenkaart2%13 === 0){ totaal += 10; } else { totaal += eigenkaart2%13; }
       if(kaart1%13 === 11 || kaart1%13 === 12 || kaart1%13 === 0){ totaalAI += 10; } else { totaalAI += kaart1%13;}
 
+      //Check split
+      if (eigenkaart1%13 === eigenkaart2%13) {
+
+        if(eigenkaart1%13 === 11 || eigenkaart1%13 === 12 || eigenkaart1%13 === 0){ totalen[0] += 10; } else { totalen[0] = eigenkaart1%13; }
+
+        totalen[1] = totalen[0];
+
+      }
+
       console.log(totaal);
     }
 
@@ -193,10 +202,7 @@
 
       var counter = 0;
 
-      if(booleanSplit === true && currentSplit === 2){
-
-        totalen[0] += totaal / 2;
-        totalen[1] += totaal / 2;
+      if(booleanSplit === false || booleanSplit === true && currentSplit === 2){
 
         if (totalen[0] <= 21) {
 
@@ -219,24 +225,6 @@
               totaal=totalen[1];
             }
           }
-
-
-            /*  var verschil = totalen[0] - totalen[1];
-
-              if (verschil < 0) {
-
-                totaal = totalen[1];
-
-              } else {
-
-                totaal = totalen[0];
-              }
-
-            } else {
-
-              totaal = totalen[1];
-            }*/
-
 
         document.getElementById("hit").disabled=true;
         document.getElementById("stand").disabled=true;
