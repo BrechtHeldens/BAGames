@@ -48,8 +48,6 @@
 
     <script>
 
-    var azenSplit1 = false;
-    var azenSplit2 = false;
     var booleanSplit = false;
     var currentSplit = 1;
 
@@ -157,14 +155,6 @@
       if(eigenkaart2%13 === 11 || eigenkaart2%13 === 12 || eigenkaart2%13 === 0){ totaal += 10; } else { totaal += eigenkaart2%13; }
       if(kaart1%13 === 11 || kaart1%13 === 12 || kaart1%13 === 0){ totaalAI += 10; } else { totaalAI += kaart1%13;}
 
-      //Azen
-      if (eigenkaart1%13 === 1|| eigenkaart2%13 === 1) {
-
-        azenSplit1 = true;
-        azenSplit2 = true;
-
-      }
-
       //Check split
       if (eigenkaart1%13 === eigenkaart2%13) {
 
@@ -195,27 +185,10 @@
 
           if(kaart%13 === 11 || kaart%13 === 12 || kaart%13 === 0){ totalen[(currentSplit-1)] += 10; } else { totalen[(currentSplit-1)] += kaart%13; }
 
-          if(kaart%13 === 1){
-            if(currentSplit === 1){
-              azenSplit1 = true;
-            } else {
-              azenSplit2 = true;
-            }
-          }
-
           var split = document.getElementById("split"+currentSplit);
           split.appendChild(newKaart);
 
         } else {
-
-          if(kaart%13 === 1){
-            if(currentSplit === 1){
-              azenSplit1 = true;
-            } else {
-              azenSplit2 = true;
-            }
-          }
-
           document.getElementById("spelerskaarten").appendChild(newKaart);
 
           if(kaart%13 === 11 || kaart%13 === 12 || kaart%13 === 0){ totaal += 10; } else { totaal += kaart%13; }
@@ -229,110 +202,82 @@
 
       var counter = 0;
 
+      if(booleanSplit === true && currentSplit === 2){
+
+        if (totalen[0] <= 21) {
+
+            if (totalen[1] <= 21) {
+
+               if (totalen[0] <= totalen[1]) {
+                   totaal = totalen[1];
+               }
+               else {
+                 totaal = totalen[1];
+               }
+
+             }
+             else {
+                 totaal=totalen[0];
+              }
+
+          }
+          else {
+              totaal=totalen[1];
+            }
+          }
+
+        document.getElementById("hit").disabled=true;
+        document.getElementById("stand").disabled=true;
+
         var kaart;
         highTotaal = 19;
 
-        if(booleanSplit === false || booleanSplit === true && currentSplit === 2){
+        if (totaal > 21) {
 
-          //Azen
-          if (azenSplit1 === true) {
+          alert("U heeft een hoger aantal dan 21, klik op restart om opnieuw te beginnen!");
 
-            if (totalen[0]+10 <= 21) {
+        } else {
 
-              totalen[0] = totalen[0] + 10;
+          do{
 
-            }
+            kaart = neemKaart();
 
-            if(totaal+10 <= 21){
-              totaal = totaal + 10;
-            }
-          }
-
-          if (azenSplit2 === true) {
-
-            if (totalen[1]+10 <= 21) {
-
-              totalen[1] = totalen[1] + 10;
-
-            }
-          }
-
-          if(booleanSplit === true && currentSplit === 2){
-
-            if (totalen[0] <= 21) {
-
-                if (totalen[1] <= 21) {
-
-                   if (totalen[0] <= totalen[1]) {
-                       totaal = totalen[1];
-                   }
-                   else {
-                     totaal = totalen[0];
-                   }
-
-                 }
-                 else {
-                     totaal=totalen[0];
-                  }
-
-              }
-              else {
-                  totaal=totalen[1];
-                }
-              }
-
-          document.getElementById("hit").disabled=true;
-          document.getElementById("stand").disabled=true;
-
-          if (totaal > 21) {
-
-            alert("U heeft een hoger aantal dan 21, klik op restart om opnieuw te beginnen!");
-
-          } else {
-
-            do{
+            if(counter < 1){
+              document.getElementById("kaart2").src="../kaartendek/" + kaart;
+            } else {
 
               kaart = neemKaart();
 
-              if(counter < 1){
-                document.getElementById("kaart2").src="../kaartendek/" + kaart;
-              } else {
+              var newKaart = document.createElement("img");
+              newKaart.src="../kaartendek/" + kaart;
+              document.getElementById("dealerkaarten").appendChild(newKaart);
 
-                kaart = neemKaart();
+            }
 
-                var newKaart = document.createElement("img");
-                newKaart.src="../kaartendek/" + kaart;
-                document.getElementById("dealerkaarten").appendChild(newKaart);
+            if(kaart%13 === 11 || kaart%13 === 12 || kaart%13 === 0){ totaalAI += 10; } else { totaalAI += kaart%13; }
+            counter++;
 
-              }
+          } while(totaalAI < highTotaal);
+        }
 
-              if(kaart%13 === 11 || kaart%13 === 12 || kaart%13 === 0){ totaalAI += 10; } else { totaalAI += kaart%13; }
-              counter++;
+        if (totaal <= 21 && totaal > totaalAI || totaalAI > 21) {
 
-            } while(totaalAI < highTotaal);
-          }
+          alert("U heeft gewonnen, proficiat!");
+          alert("Jouw totaal was: " + totaal);
+          alert("Het totaal van de dealer was: " + totaalAI);
 
-          if (totaal <= 21 && totaal > totaalAI || totaalAI > 21) {
+        } else {
 
-            alert("U heeft gewonnen, proficiat!");
-            alert("Jouw totaal was: " + totaal);
-            alert("Het totaal van de dealer was: " + totaalAI);
+          alert("U heeft verloren!");
+          alert("Jouw totaal was: " + totaal);
+          alert("Het totaal van de dealer was: " + totaalAI);
 
-          } else {
-
-            alert("U heeft verloren!");
-            alert("Jouw totaal was: " + totaal);
-            alert("Het totaal van de dealer was: " + totaalAI);
-
-          }
         }
 
       currentSplit = 2;
       document.getElementById("restart").disabled=false;
 
     }
-
-
 
     function split(){
       booleanSplit = true;
@@ -357,7 +302,6 @@
     function restart(){
       this.window.location.href="http://localhost/dimitry%20knoops/Github/BAGames/blackjack/";
     }
-
 
     </script>
   </body>

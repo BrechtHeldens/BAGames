@@ -49,10 +49,10 @@ if (!isset($_SESSION["gebruikersid"])) {
 
         <center>
           <p id="gametitel">
-            <a href='.$row['beginpagina'].'.php>'.$row['spelnaam'].'</a>
+            <a href='.$row['beginpagina'].'>'.$row['spelnaam'].'</a>
           </p>
 
-          <a href='.$row['beginpagina'].'.php><img src="../images/'.$row['afbeelding'].'" id="gamefoto"></a>
+          <a href='.$row['beginpagina'].'><img src="../images/'.$row['afbeelding'].'" id="gamefoto"></a>
         </center>
 
       </div>';
