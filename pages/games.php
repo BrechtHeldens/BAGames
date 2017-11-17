@@ -70,21 +70,24 @@ if (!isset($_SESSION["gebruikersid"])) {
     }
 
     if (isset($_SESSION['gebruikerstype'])) {
-      
+
       if ($_SESSION['gebruikerstype'] == 1) {
         echo '
         <div class="row">
           <br>
           <div class="col-xs-12">
             <center>
-              <a href="offline.php">Offline halen</a>
+              <a href="offline.php"><button>Offline halen</button></a>
             </center>
           </div>';
 
         }
       }
 
-      print "<a href='feedback.php'>Klik hier om feedback in te dienen</a>";
+      print "<center><a href='feedback.php'><button>Klik hier om feedback in te dienen</button></a></center>";
+
+      echo '</div>';
+
       ?>
 
   </body>

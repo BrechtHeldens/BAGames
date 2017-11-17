@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blackjack</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Fonts -->
+  </head>
+
+  <body>
+
+    <!-- Kaarten van dealer -->
+    <div class="main">
+      <div class="container-fluid">
+        <center><div id="kaart">
+          <div id="dealerkaarten" class="row rowFix">
+              <img id="kaart1" src="../kaartendek/kaartbg.png"/>
+              <img id="kaart2" src="../kaartendek/kaartbg.png"/>
+          </div>
+
+          <div id="spelerskaarten" class="row rowFix">
+              <img id="eigenkaart1" src="../kaartendek/kaartbg.png"/>
+              <img id="eigenkaart2" src="../kaartendek/kaartbg.png"/>
+        </div></center>
+      </div>
+    </div>
+
+
+    <center><div class="footer">
+      <center><div class="container">
+
+        <div class="row">
+          <div class="col-xs-2"><button id="deal" class="btn" onclick="deal()">Deal</button></div>
+          <div class="col-xs-2"><button id="hit" class="btn" onclick="hit()" disabled="true">Hit</button></div>
+          <div class="col-xs-2"><button id="split" class="btn" onclick="split()" disabled="true">Split</button></div>
+          <div class="col-xs-2"><button id="stand" class="btn" onclick="stand()" disabled="true">Stand</button></div>
+          <div class="col-xs-2"><button id="restart" class="btn" onclick="restart()" disabled="true">Restart</button></div>
+          <div class="col-xs-2"><button class="btn" onclick="window.location.href='../'">BAGAMES</button></div>
+        </div>
+
+      </div></center>
+    </div></center>
+
+    <script>
+
+    var booleanSplit = false;
+    var currentSplit = 1;
+
+    var totalen = [0, 0];
+
+    var aantalWins = 0;
+
+    var kaartendek = [];
+    var getrokkenKaarten = [];
+
+    var kaartenSpeler = [];
+    var kaartenBank = [];
+
+    var kaartenSpeler2 = [];
+    var isSplit = false;
+    start();
+
+    function start(){
+
+
+      initialiseerKaarten();
+
+      kaartenSpeler.push(neemKaart());
+      kaartenSpeler.push(neemKaart());
+      kaartenBank.push(neemKaart());
+      kaartenBank.push(neemKaart());
+
+      var canSplit = checkDouble();
+      if (canSplit) {
+        split();
+    }
+
+    }
+
+    //CHECK SPLIT
+    function checkDouble(){
+      var kaart1 = kaartenSpeler[0] % 13;
+      var kaart2 = kaartenSpeler[1] % 13;
+
+      if (kaart1 === kaart2){
+        return true;
+    }
+
+    return false;
+  }
+
+    //KAARTEN INITIALISEREN
+    function initialiseerKaarten(){
+
+      for (var x = 1; x <= 4; x++) {
+        for (var y = 1; y <= 13; y++) {
+          var kaartnummer;
+          kaartnummer = ((x - 1) * 13) + y;
+          kaartendek.push(kaartnummer);
+        }
+      }
+
+    }
+
+    //NIEUWE KAART SELECTEREN
+    function neemKaart(){
+      do{
+        var kaart = Math.floor((Math.random() * kaartendek.length) + 1);
+        var newKaart;
+
+        for (var i = 0; i < getrokkenKaarten.length; i++) {
+          if (kaart === getrokkenKaarten[i]) {
+            newKaart = false;
+            i = getrokkenKaarten.length;
+          } else {
+            newKaart = true;
+          }
+        }
+
+      } while (newKaart == false);
+
+      getrokkenKaarten.push(kaart);
+      return kaart;
+    }
+
+    //Grafisch
+    var totaal = 0;
+    var totaalAI = 0;
+
+    function deal(){
+
+      document.getElementById("deal").disabled=true;
+      document.getElementById("hit").disabled=false;
+      document.getElementById("stand").disabled=false;
+
+      var kaart1 = neemKaart();
+      var eigenkaart1 = neemKaart();
+      var eigenkaart2 = neemKaart();
+
+      if(eigenkaart1%13 === eigenkaart2%13){
+        document.getElementById("split").disabled=false;
+      }
+
+      document.getElementById("kaart1").src="../kaartendek/" + kaart1;
+      document.getElementById("eigenkaart1").src="../kaartendek/" + eigenkaart1;
+      document.getElementById("eigenkaart2").src="../kaartendek/" + eigenkaart2;
+
+      //Beeldjes zijn 10
+      if(eigenkaart1%13 === 11 || eigenkaart1%13 === 12 || eigenkaart1%13 === 0){ totaal += 10; } else { totaal += eigenkaart1%13; }
+      if(eigenkaart2%13 === 11 || eigenkaart2%13 === 12 || eigenkaart2%13 === 0){ totaal += 10; } else { totaal += eigenkaart2%13; }
+      if(kaart1%13 === 11 || kaart1%13 === 12 || kaart1%13 === 0){ totaalAI += 10; } else { totaalAI += kaart1%13;}
+
+      console.log(totaal);
+    }
+
+    function hit(){
+
+      document.getElementById("split").disabled=true;
+
+      if(totaal > 21){
+        //Gaat niet, geen hits meer
+        alert("U heeft een hoger aantal dan 21, klik op STAND!");
+      } else {
+
+        var kaart = neemKaart();
+
+        var newKaart = document.createElement("img");
+        newKaart.src="../kaartendek/" + kaart;
+
+        if (booleanSplit === true) {
+
+          if(kaart%13 === 11 || kaart%13 === 12 || kaart%13 === 0){ totalen[(currentSplit-1)] += 10; } else { totalen[(currentSplit-1)] += kaart%13; }
+
+          var split = document.getElementById("split"+currentSplit);
+          split.appendChild(newKaart);
+
+        } else {
+          document.getElementById("spelerskaarten").appendChild(newKaart);
+
+          if(kaart%13 === 11 || kaart%13 === 12 || kaart%13 === 0){ totaal += 10; } else { totaal += kaart%13; }
+          console.log(kaart%13 + "///" + kaart + "totaal: " + totaal);
+          //alert(totaal);
+        }
+      }
+    }
+
+    function stand(){
+
+      var counter = 0;
+
+      if(booleanSplit === true && currentSplit === 2){
+
+        totalen[0] += totaal / 2;
+        totalen[1] += totaal / 2;
+
+        if (totalen[0] <= 21) {
+
+            if (totalen[1] <= 21) {
+
+               if (totalen[0] <= totalen[1]) {
+                   totaal = totalen[1];
+               }
+               else {
+                 totaal = totalen[1];
+               }
+
+             }
+             else {
+                 totaal=totalen[0];
+              }
+
+          }
+          else {
+              totaal=totalen[1];
+            }
+          }
+
+
+            /*  var verschil = totalen[0] - totalen[1];
+
+              if (verschil < 0) {
+
+                totaal = totalen[1];
+
+              } else {
+
+                totaal = totalen[0];
+              }
+
+            } else {
+
+              totaal = totalen[1];
+            }*/
+
+
+        document.getElementById("hit").disabled=true;
+        document.getElementById("stand").disabled=true;
+
+        var kaart;
+        highTotaal = 19;
+
+        if (totaal > 21) {
+
+          alert("U heeft een hoger aantal dan 21, klik op restart om opnieuw te beginnen!");
+
+        } else {
+
+          do{
+
+            kaart = neemKaart();
+
+            if(counter < 1){
+              document.getElementById("kaart2").src="../kaartendek/" + kaart;
+            } else {
+
+              kaart = neemKaart();
+
+              var newKaart = document.createElement("img");
+              newKaart.src="../kaartendek/" + kaart;
+              document.getElementById("dealerkaarten").appendChild(newKaart);
+
+            }
+
+            if(kaart%13 === 11 || kaart%13 === 12 || kaart%13 === 0){ totaalAI += 10; } else { totaalAI += kaart%13; }
+            counter++;
+
+          } while(totaalAI < highTotaal);
+        }
+
+        if (totaal <= 21 && totaal > totaalAI || totaalAI > 21) {
+
+          alert("U heeft gewonnen, proficiat!");
+          alert("Jouw totaal was: " + totaal);
+          alert("Het totaal van de dealer was: " + totaalAI);
+
+        } else {
+
+          alert("U heeft verloren!");
+          alert("Jouw totaal was: " + totaal);
+          alert("Het totaal van de dealer was: " + totaalAI);
+
+        }
+
+      currentSplit = 2;
+      document.getElementById("restart").disabled=false;
+
+    }
+
+    function split(){
+      booleanSplit = true;
+
+      var split1 = document.createElement("div");
+      split1.classList.add("col-xs-6");
+      split1.setAttribute("id", "split1")
+      split1.appendChild(document.getElementById("eigenkaart1"));
+      document.getElementById("spelerskaarten").appendChild(split1);
+
+      var split2 = document.createElement("div");
+      split2.classList.add("col-xs-6");
+      split2.setAttribute("id", "split2")
+      split2.appendChild(document.getElementById("eigenkaart2"));
+      document.getElementById("spelerskaarten").appendChild(split2);
+
+      //Behoud de juiste grootte
+      document.getElementById("eigenkaart1").classList.add("splitKaart");
+      document.getElementById("eigenkaart2").classList.add("splitKaart");
+    }
+
+    function restart(){
+      this.window.location.href="http://localhost/dimitry%20knoops/Github/BAGames/blackjack/";
+    }
+
+    </script>
+  </body>
+</html>

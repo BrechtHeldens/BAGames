@@ -1,18 +1,18 @@
 <?php
+  session_start();
   include "../handelingen/connect.php";
   include 'header.php';
-  session_start();
-  $_SESSION['gebruikersid'] = 1;
-  echo "<h1>Feedback geven.</h1>";
+
+  echo "<div class='feedback'>
+          <center>
+            <h1>Feedback geven.</h1>";
 
   if (isset($_POST["knop"])) {
     $sql = "insert into tblfeedback (titel, tekst, type, gebruikersid)
     values ('".$_POST['titel']."','".$_POST['tekst']."','".$_POST['type']."','".$_SESSION['gebruikersid']."')";
 
-    echo $sql;
-
     echo "<br>";
-    echo "Je feedback is succesvol doorgestuurd.";
+    echo "<p>Je feedback is succesvol doorgestuurd.</p>";
     $resultaat = $mysqli->query($sql);
 
   } else {
@@ -21,19 +21,28 @@
       <table>
         <tr>
           <td>Titel:</td>
+        </tr>
+
+        <tr>
           <td><input type="text" name="titel"></td>
         </tr>
 
         <tr>
           <td>Klacht:</td>
-          <td><input type="text" name="tekst"></td>
+        </tr>
+
+        <tr>
+          <td><textarea type="text" name="tekst"></textarea></td>
         </tr>
 
         <tr>
           <td>Type:</td>
+        </tr>
+
+        <tr>
           <td><select name="type">
                 <option value=1>Feedback</option>
-                <option value=2>report</option>
+                <option value=2>Report</option>
               </select>
           </td>
         </tr>
@@ -47,6 +56,7 @@
 
   }
 
-  echo "<a href=games.php>Ga terug</a>";
-
+  echo "    <a href=games.php>◄ Ga terug</a>
+          </center>
+        </div>";
 ?>
