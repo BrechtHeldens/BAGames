@@ -263,3 +263,107 @@
 	.feedback td{
 		padding: 5px;
 	}
+
+	/* -- Hoger Lager -- */
+	#kaartAchtergrond{
+		background: url("../images/green.jpg") no-repeat;
+	}
+
+	.kaarten{
+		border: 5px solid black;
+		position: relative;
+		top: 12%;
+		margin: auto;
+		width: 55%;
+		height: 560px;
+	}
+
+	.kaarten img{
+		height: 150px;
+		margin: 15px 0 0 0;
+	}
+
+	.container {
+		margin-top: 3em;
+  	width: 200px;
+  	height: 200px;
+  	position: relative;
+	}
+
+	#score{
+		display: block;
+		position: relative;
+		margin: 1em 0 0 1em;
+		visibility: hidden;
+		float: left;
+		font-size: 14pt;
+	}
+
+	#card {
+		position: relative;
+		visibility: hidden;
+  	transform-style: preserve-3d;
+  	transition: transform 1s;
+	}
+
+	#card div {
+  	display: block;
+  	height: 100%;
+  	width: 100%;
+  	text-align: center;
+  	position: absolute;
+  	-webkit-backface-visibility: hidden;
+  	-moz-backface-visibility: hidden;
+  	-o-backface-visibility: hidden;
+  	backface-visibility: hidden;
+	}
+
+	#card .front {
+ 		margin: auto;
+	}
+
+	#card .back {
+		top: 0px;
+  	-webkit-transform: rotateY( 180deg );
+  	-moz-transform: rotateY( 180deg );
+  	-o-transform: rotateY( 180deg );
+  	transform: rotateY( 180deg );
+	}
+
+	#card.flipped {
+		-webkit-transform: rotateY( 180deg );
+		-moz-transform: rotateY( 180deg );
+		-o-transform: rotateY( 180deg );
+		transform: rotateY( 180deg );
+	}
+
+	#tekst{
+		position: relative;
+		font-size: 14pt;
+		margin: auto;
+		width: auto;
+		text-align: center;
+	}
+
+	#flip{
+		visibility: inherit;
+	}
+
+	#options{
+		display: block;
+		visibility: hidden;
+	}
+
+	#start{
+		clear: both;
+		visibility: visible;
+	}
+
+	#hoger, #lager{
+		visibility: hidden;
+	}
+
+	#gameMessage{
+		color: #1c4c0a;
+		font-weight: bold;
+	}

@@ -36,6 +36,7 @@
     <li><a href="alleLobby.php">Alle lobbys</a></li>
     <li><a href="leaderboard.php">Leaderboard</a></li>
     <li><a href="items.php">Mijn items</a></li>
+    <li><a href="hoger-lager_spel.php">Spelen</a></li>
     ';
 ?>
 

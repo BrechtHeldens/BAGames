@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <?php
-include "../handelingen/connect.php";
-include 'header.php';
-$spelid = $_GET["spel"];
-$bestaat = "false";
-if($spelid <= 0 || $spelid/$spelid != 1){
-  //Fout in URL
-  echo "<center><h1>Error</h1></center>
-  <center><h4>Er is een fout opgetreden, <a href='../index.php'>ga terug naar de homepage</a></h4></center>";
-} else {
-  //Correcte URL - Check of het id bestaat
-  $qry = "SELECT * FROM tblspellen WHERE spelid = '".$spelid."';";
-  $row = $mysqli->query($qry);
-  if($col = $row->fetch_assoc()){
-    //Spel is gevonden
-    $bestaat = "true";
-  } else {
-    //Spel is onbekend
-    echo "<center><h1>Error</h1></center>
-    <center><h4>Er is een fout opgetreden, <a href='../index.php'>ga terug naar de homepage</a></h4></center>";
+  include "../handelingen/connect.php";
+  session_start();
+  include 'header.php';
+  $spelid = $_GET["spel"];
+  $bestaat = "false";
+
+  if($spelid <= 0 || $spelid/$spelid != 1){
+    //Fout in URL
+    echo "
+    <center>
+      <h1>Error</h1>
+    </center>
+    <center>
+      <h4>Er is een fout opgetreden, <a href='../index.php'>ga terug naar de homepage</a></h4>
+    </center>";
   }
-}
+  else
+  {
+
+    //Correcte URL - Check of het id bestaat
+    $qry = "SELECT * FROM tblspellen WHERE spelid = '".$spelid."';";
+    $row = $mysqli->query($qry);
+    if($col = $row->fetch_assoc()){
+      //Spel is gevonden
+      $bestaat = "true";
+    } else {
+      //Spel is onbekend
+      echo "
+      <center>
+        <h1>Error</h1>
+      </center>
+      <center>
+        <h4>Er is een fout opgetreden, <a href='../index.php'>ga terug naar de homepage</a></h4>
+      </center>";
+    }
+  }
 ?>
+
 <html>
   <head>
     <title></title>
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
   </head>
 
@@ -32,13 +49,16 @@ if($spelid <= 0 || $spelid/$spelid != 1){
 
     <?php
 
-    if($bestaat == "true"){
+      if($bestaat == "true"){
 
-      $qry = "SELECT * FROM tblspellen WHERE spelid = '".$spelid."';";
-      $row = $mysqli->query($qry);
-      $col = $row->fetch_assoc();
+        $qry = "SELECT * FROM tblspellen WHERE spelid = '".$spelid."';";
+        $row = $mysqli->query($qry);
+        $col = $row->fetch_assoc();
 
-      echo "<center><h1>Winkel - ".$col["spelnaam"]."</h1></center>";
+        echo "
+        <center>
+          <h1>Winkel - ".$col["spelnaam"]."</h1>
+        </center>";
 
       $aantal = 0;
 

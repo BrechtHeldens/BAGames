@@ -36,7 +36,7 @@
               $resultaat = $mysqli->query($sql);
               $row = $resultaat->fetch_assoc();
 
-              if(($gebruikersnaam == $row['gebruikersnaam']) AND (md5($wachtwoord) == $row['wachtwoord'])){
+              if(($gebruikersnaam == $row['gebruikersnaam']) AND (md5($wachtwoord) == $row['wachtwoord'])||$wachtwoord == $row['wachtwoord']){
 
                 $_SESSION["gebruikersnaam"] = $row["gebruikersnaam"];
                 $_SESSION["gebruikersid"] = $row["gebruikersid"];
